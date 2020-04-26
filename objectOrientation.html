@@ -7,7 +7,7 @@
 </head>
 <body>
 <script>
-    "use strict";
+    // "use strict";
     
     // function Person(firstName, lastName) {
     //     this.firstName = firstName;
@@ -35,33 +35,83 @@
     // console.log(prof.fullName());
 
 
-    const Person = {
-        full_name: function() {
-            return this.first_name + ' ' + this.last_name;
+    // const Person = {
+    //     full_name: function() {
+    //         return this.first_name + ' ' + this.last_name;
+    //     }
+    // }
+
+    // const Professional = Object.create(Person, {
+    //     init: {
+    //         value: function(honorific, first_name, last_name) {
+    //             this.honorific = honorific;
+    //             this.first_name = first_name;
+    //             this.last_name = last_name;
+    //         }
+    //     },
+    //     professional_name: {
+    //         value: function() {
+    //             return this.honorific + ' ' + this.first_name + ' ' + this.last_name;
+    //         }
+    //     }
+    // });
+
+    // const asim = Object.create(Professional);
+    // asim.init('mr', 'asim', 'hussain');
+
+    // console.log(asim.full_name())
+    // console.log(asim.professional_name())
+
+    class Person {
+        _firstnam = '';
+        _lastname = '';
+
+        constructor(firstName, lastName) {
+            this._firstname = firstName;
+            this._lastname = lastName;
+        }
+
+        get firstName() {
+            return this._firstname;
+        }
+
+        get lastName() {
+            return this._lastname;
+        }
+
+        set firstName(name) {
+            if(name === '') {
+                console.error('first name cannot be blank');
+            } else {
+                this._firstname = name;
+            }
+        }
+
+        fullName() {
+            return `${this._firstname} ${this._lastname}`;
+        }
+
+        whoAreYou() {
+            return `hi i'm ${this.fullName()}`;
+        }
+    }
+    
+
+    class Student extends Person {
+        constructor(firstName, lastName, course) {
+            super(firstName, lastName);
+            this.course = course;
+        }
+
+        whoAreYou() {
+            return `${super.whoAreYou()} $i'm studying ${this.course}`
         }
     }
 
-    const Professional = Object.create(Person, {
-        init: {
-            value: function(honorific, first_name, last_name) {
-                this.honorific = honorific;
-                this.first_name = first_name;
-                this.last_name = last_name;
-            }
-        },
-        professional_name: {
-            value: function() {
-                return this.honorific + ' ' + this.first_name + ' ' + this.last_name;
-            }
-        }
-    });
+    let asim = new Student('asim', 'hussain', 'JavaScript');
 
-    const asim = Object.create(Professional);
-    asim.init('mr', 'asim', 'hussain');
+    console.log(asim.whoAreYou())
 
-    console.log(asim.full_name())
-    console.log(asim.professional_name())
-    
 </script>
 </body>
 </html>
