@@ -9,30 +9,47 @@
 <script>
     "use strict";
     
-    function Person(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    };
+    // function Person(firstName, lastName) {
+    //     this.firstName = firstName;
+    //     this.lastName = lastName;
+    // };
 
-    Person.prototype.fullName = function() {
-        return this.firstName + ' ' + this.lastName;
+    // Person.prototype.fullName = function() {
+    //     return this.firstName + ' ' + this.lastName;
+    // }
+
+    // function Professional(honorific, firstName, lastName) {
+    //     Person.call(this, firstName, lastName)
+    //     this.honorific = honorific;
+    // }
+
+    // Professional.prototype = Object.create(Person.prototype)
+
+    // Professional.prototype.professionalName = function() {
+    //     return this.honorific + ' ' + this.firstName + ' ' + this.lastName;
+    // }
+
+    // const prof = new Professional('Dr', 'Asim', 'Hussain');
+
+    // console.log(prof.professionalName());
+    // console.log(prof.fullName());
+
+
+    const Person = {
+        full_name: function() {
+            return this.first_name + ' ' + this.last_name;
+        }
     }
 
-    function Professional(honorific, firstName, lastName) {
-        Person.call(this, firstName, lastName)
-        this.honorific = honorific;
+    function PersonFactory(first_name, last_name) {
+        const person = Object.create(Person);
+        person.first_name = first_name;
+        person.last_name = last_name;
+        return person;
     }
 
-    Professional.prototype = Object.create(Person.prototype)
-
-    Professional.prototype.professionalName = function() {
-        return this.honorific + ' ' + this.firstName + ' ' + this.lastName;
-    }
-
-    const prof = new Professional('Dr', 'Asim', 'Hussain');
-
-    console.log(prof.professionalName())
-    console.log(prof.fullName())
+    const asim = PersonFactory('asim', 'hussain');
+    console.log(asim.full_name());
 </script>
 </body>
 </html>
