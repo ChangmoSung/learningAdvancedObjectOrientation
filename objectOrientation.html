@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    "use strict";
+    
+    function Person(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    };
+
+    Person.prototype.fullName = function() {
+        return this.firstName + ' ' + this.lastName;
+    }
+
+    function Professional(honorific, firstName, lastName) {
+        Person.call(this, firstName, lastName)
+        this.honorific = honorific;
+    }
+
+    Professional.prototype = Object.create(Person.prototype)
+
+    Professional.prototype.professionalName = function() {
+        return this.honorific + ' ' + this.firstName + ' ' + this.lastName;
+    }
+
+    const prof = new Professional('Dr', 'Asim', 'Hussain');
+
+    console.log(prof.professionalName())
+    console.log(prof.fullName())
+</script>
+</body>
+</html>
